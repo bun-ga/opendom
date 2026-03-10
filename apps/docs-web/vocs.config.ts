@@ -15,5 +15,17 @@ export default defineConfig({
       text: "First Commands",
       link: "/first-commands",
     },
+    {
+      text: "Safety & Reliability",
+      link: "/safety",
+    },
+    {
+      text: "Provider Matrix",
+      link: "/providers-matrix",
+    },
+    {
+      text: "Command Reference",
+      link: "/reference",
+    },
   ],
 });
