@@ -1,0 +1,26 @@
+{
+  "name": "@opendom/config",
+  "version": "0.1.0",
+  "description": "Shared opendom configuration and credential storage utilities.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "biome check .",
+    "test": "bun test",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@opendom/tsconfig": "workspace:*",
+    "@types/node": "^22.19.11",
+    "typescript": "^5.9.3"
+  }
+}

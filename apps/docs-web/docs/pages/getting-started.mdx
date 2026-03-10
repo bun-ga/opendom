@@ -1,0 +1,101 @@
+# Setup & Installation
+
+`opendom` is a terminal-first domain manager for Netim, Cloudflare, Porkbun, and Namecheap.
+
+> **Preview:** Package publishing is pending. The Homebrew and npm commands below use the target release names and are currently illustrative.
+
+## Install with Homebrew (macOS/Linuxbrew)
+
+```bash
+brew tap bunga/opendom
+brew install opendom-cli
+```
+
+## Install with a package manager
+
+:::code-group
+```bash [npm]
+npm install -g @bunga/opendom-cli
+```
+
+```bash [pnpm]
+pnpm add -g @bunga/opendom-cli
+```
+
+```bash [yarn]
+yarn global add @bunga/opendom-cli
+```
+
+```bash [bun]
+bun add -g @bunga/opendom-cli
+```
+:::
+
+## Verify installation
+
+```bash
+opendom --version
+opendom --help
+```
+
+Expected result:
+- `--version` prints the installed CLI version.
+- `--help` prints command groups (`AUTH`, `DOMAINS`, `DNS`, `ACCOUNT`) and available providers.
+
+## First login
+
+```bash
+opendom login netim
+```
+
+You can also authenticate with `cloudflare`, `porkbun`, or `namecheap` the same way:
+
+```bash
+opendom login cloudflare
+opendom login porkbun
+opendom login namecheap
+```
+
+If you need non-interactive scripting, the flag-based `opendom login --provider <provider> ...` form still works.
+
+## Choose your default provider
+
+```bash
+opendom set-default netim
+```
+
+After that, normal commands use your saved default provider automatically. You can still override it on any command with `--provider <provider>`.
+
+## Run your first command
+
+```bash
+opendom search myproject --tlds com,io
+```
+
+## Notes
+
+- If no default is set and exactly one provider is configured, `opendom` uses that provider automatically.
+- If multiple providers are configured and no default is set, `opendom` asks you to run `opendom set-default <provider>` or pass `--provider`.
+- `--provider` is the override flag when you want to target a different provider for one command.
+
+## Troubleshooting
+
+### `opendom: command not found`
+
+- Ensure your global npm bin path or Homebrew bin path is on `PATH`.
+- Restart your shell after installation.
+
+### Authentication error or missing credentials
+
+- Run `opendom login <provider>` first.
+- Confirm your provider credentials are valid and have required scopes.
+
+### Wrong or missing provider behavior
+
+- Save a default with `opendom set-default <netim|cloudflare|porkbun|namecheap>`.
+- Or override for one command with `--provider <netim|cloudflare|porkbun|namecheap>`.
+- Run `opendom --help` to verify command and flag syntax.
+
+## Next step
+
+Continue to [Authentication](/authentication) for provider-specific login commands and verification checks.

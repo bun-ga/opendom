@@ -1,0 +1,170 @@
+# Authentication
+
+This page covers provider login commands and quick checks to confirm your credentials are working.
+
+## Overview
+
+- Authenticate once per provider with `opendom login <provider>`.
+- Credentials are stored in your local config for future commands.
+- Set a default provider with `opendom set-default <provider>`.
+- Use `--provider` only when you want to override the saved default for one command.
+
+## Provider login commands
+
+The easiest path is the interactive login flow. It prompts line-by-line and masks secret values while you type.
+
+### Netim
+
+```bash
+opendom login netim
+```
+
+Explicit flag-based form:
+
+```bash
+opendom login --provider netim --id YOUR_RESELLER_ID --secret YOUR_API_SECRET --ote
+```
+
+Required flags:
+- `--id`
+- `--secret`
+
+Optional:
+- `--ote` for test environment.
+
+### Cloudflare
+
+```bash
+opendom login cloudflare
+```
+
+Explicit flag-based form:
+
+```bash
+opendom login --provider cloudflare --token YOUR_API_TOKEN --account-id YOUR_ACCOUNT_ID
+```
+
+Required flags:
+- `--token`
+
+Optional:
+- `--account-id` (recommended for consistent registrar operations).
+
+### Porkbun
+
+```bash
+opendom login porkbun
+```
+
+Explicit flag-based form:
+
+```bash
+opendom login --provider porkbun --apikey YOUR_API_KEY --secretapikey YOUR_SECRET_API_KEY
+```
+
+Required flags:
+- `--apikey`
+- `--secretapikey`
+
+### Namecheap
+
+```bash
+opendom login namecheap
+```
+
+Explicit flag-based form:
+
+```bash
+opendom login --provider namecheap --api-user YOUR_API_USER --username YOUR_USERNAME --api-key YOUR_API_KEY --client-ip YOUR_CLIENT_IP --sandbox
+```
+
+Required flags:
+- `--api-user`
+- `--username`
+- `--api-key`
+- `--client-ip`
+
+Optional:
+- `--sandbox` for sandbox mode.
+- `--address-id` when you want to choose a specific Namecheap address profile during flag-based login.
+
+## Set a default provider
+
+Save the provider you want normal commands to use:
+
+```bash
+opendom set-default cloudflare
+```
+
+Provider resolution now works like this:
+
+1. `--provider <provider>` overrides everything for that command.
+2. Otherwise, `opendom` uses your saved default provider.
+3. If no default is set and exactly one provider is configured, `opendom` uses that provider automatically.
+4. If multiple providers are configured and no default is set, `opendom` asks you to run `opendom set-default <provider>` or pass `--provider`.
+
+## Verify authentication
+
+If you set a default provider:
+
+```bash
+opendom domains
+```
+
+Override the default for a one-off check:
+
+```bash
+opendom domains --provider <netim|cloudflare|porkbun|namecheap>
+```
+
+## Logout
+
+Logout a single provider:
+
+```bash
+opendom logout
+```
+
+Target a specific provider explicitly:
+
+```bash
+opendom logout --provider cloudflare
+```
+
+Logout every configured provider:
+
+```bash
+opendom logout --all
+```
+
+## Troubleshooting
+
+### Invalid token/key/secret
+
+- Re-run login with fresh credentials.
+- Confirm no leading/trailing spaces in copied values.
+
+### Missing required login flags
+
+- Prefer `opendom login <provider>` if you are logging in manually.
+- For non-interactive usage, run `opendom --help` and verify provider-specific login flags.
+
+### Cloudflare token scope problems
+
+- Ensure token has DNS and registrar/account scope needed by your command set.
+- Add `--account-id` to reduce registrar lookup failures.
+
+### Namecheap `ClientIp` issues
+
+- Ensure your current public IP is whitelisted in Namecheap API settings.
+- Use `--sandbox` during testing when applicable.
+- If Namecheap cannot resolve the correct address profile automatically, re-run `opendom login namecheap` and provide an address ID when prompted.
+
+## Notes
+
+- `--provider` is now an override, not the primary way to choose a provider.
+- If you use multiple providers, set a default once and keep `--provider` for occasional overrides.
+
+## Next step
+
+Continue to [First Commands](/first-commands) for a copy-paste command journey.

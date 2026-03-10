@@ -1,0 +1,30 @@
+{
+  "name": "opendom-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Bun + Turborepo monorepo for opendom CLI and shared packages.",
+  "packageManager": "bun@1.3.9",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "start": "turbo run start --filter=@opendom/cli",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "test:smoke:preflight": "node scripts/smoke/preflight.mjs",
+    "test:smoke:read": "node scripts/smoke/read-only.mjs",
+    "test:smoke": "bun run test:smoke:preflight && bun run build && bun run test:smoke:read",
+    "test:smoke:netim": "bun run test:smoke:preflight -- --provider netim && bun run build && bun run test:smoke:read -- --provider netim",
+    "test:smoke:cloudflare": "bun run test:smoke:preflight -- --provider cloudflare && bun run build && bun run test:smoke:read -- --provider cloudflare",
+    "test:smoke:porkbun": "bun run test:smoke:preflight -- --provider porkbun && bun run build && bun run test:smoke:read -- --provider porkbun",
+    "test:smoke:namecheap": "bun run test:smoke:preflight -- --provider namecheap && bun run build && bun run test:smoke:read -- --provider namecheap"
+  },
+  "devDependencies": {
+    "turbo": "^2.8.13"
+  }
+}

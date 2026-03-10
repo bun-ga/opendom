@@ -1,0 +1,102 @@
+# First Commands
+
+Use this page as your first command journey after login.
+
+## Before you start
+
+- Complete [Authentication](/authentication) first.
+- Set a default provider first, or add `--provider <provider>` when you want a one-off override.
+- Mutating commands can cost money and change real DNS state.
+
+## Track A: Cloudflare read-only flow
+
+Cloudflare is the default path for safe, read-only validation.
+The examples below assume `cloudflare` is your saved default provider.
+
+### 1. Search domains
+
+```bash
+opendom search myproject --tlds com,io
+```
+
+### 2. List your domains
+
+```bash
+opendom domains
+```
+
+### 3. Inspect domain details
+
+```bash
+opendom info example.com
+```
+
+### 4. List DNS records
+
+```bash
+opendom dns list example.com
+```
+
+## Track B: Mutating flow (Netim/Porkbun/Namecheap)
+
+For full register-and-manage operations, use a provider that supports `buy` and renewal in CLI.
+Canonical examples below use `netim`, and assume `netim` is your saved default provider.
+
+### 1. Buy a domain
+
+```bash
+opendom buy myproject.com --yes
+```
+
+### 2. Confirm domain info
+
+```bash
+opendom info myproject.com
+```
+
+### 3. Add DNS record
+
+```bash
+opendom dns set myproject.com A 1.2.3.4 --subdomain app --ttl 300
+```
+
+### 4. Update DNS record
+
+```bash
+opendom dns update myproject.com A 1.2.3.4 5.6.7.8 --subdomain app --ttl 300
+```
+
+### 5. Remove DNS record
+
+```bash
+opendom dns rm myproject.com A 5.6.7.8 --subdomain app
+```
+
+### 6. Renew domain
+
+```bash
+opendom renew myproject.com --duration 1 --yes
+```
+
+If you want to target a different provider for a single command, append `--provider <provider>`.
+
+## Cloudflare fail-fast commands
+
+Cloudflare intentionally fails fast for these operations in this CLI flow:
+
+- `buy`
+- `renew`
+- `dns ns`
+
+Use the Cloudflare dashboard for unsupported registrar operations.
+
+## Safety notes
+
+- Use disposable domains for tests.
+- Prefer OT&E/sandbox credentials where available.
+- Double-check target domains before running mutating DNS commands.
+
+## What to run next
+
+1. Revisit [Setup & Installation](/getting-started) for install and global notes.
+2. Revisit [Authentication](/authentication) for provider credential troubleshooting.

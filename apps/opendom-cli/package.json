@@ -1,0 +1,28 @@
+{
+  "name": "@opendom/cli",
+  "version": "0.2.0",
+  "description": "CLI domain management tool. No upsells, no popups, just domains.",
+  "type": "module",
+  "bin": {
+    "opendom": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "biome check .",
+    "test": "bun test",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@opendom/config": "workspace:*"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@opendom/tsconfig": "workspace:*",
+    "@types/node": "^22.19.11",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
