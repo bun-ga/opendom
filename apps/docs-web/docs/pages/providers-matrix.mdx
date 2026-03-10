@@ -1,0 +1,39 @@
+# Provider Capability Matrix
+
+`opendom` provides a unified CLI interface for multiple registrars. Not all registrars expose the same API capabilities.
+
+## Capability Support
+
+| Feature | Netim | Cloudflare | Porkbun | Namecheap |
+|---------|:-----:|:----------:|:-------:|:---------:|
+| `search` | ✅ | ✅ | ✅ | ✅ |
+| `buy` | ✅ | ❌ | ✅ | ✅ |
+| `domains` | ✅ | ✅ | ✅ | ✅ |
+| `info` | ✅ | ✅ | ✅ | ✅ |
+| `renew` | ✅ | ❌ | ❌ | ✅ |
+| `set preference` | ✅ | ✅ | ✅ | ✅ |
+| `dns-list` | ✅ | ✅ | ✅ | ✅ |
+| `dns-set` | ✅ | ✅ | ✅ | ✅ |
+| `dns-rm` | ✅ | ✅ | ✅ | ✅ |
+| `dns-update` | ✅ | ✅ | ✅ | ✅ |
+| `dns-ns` | ✅ | ❌ | ✅ | ✅ |
+| `balance` | ✅ | ✅ | ✅ | ✅ |
+
+### Feature Details
+
+-   **search:** Check domain availability with optional pricing.
+-   **buy:** Purchase available domains directly from CLI.
+-   **domains:** List all domains currently in your account.
+-   **info:** Get detailed domain info (expiration, status, nameservers).
+-   **renew:** Extend domain registration period.
+-   **dns-ns:** Update nameserver assignments for your domain.
+
+## Choosing a Provider
+
+| Use Case | Recommended Provider |
+|----------|---------------------|
+| Full domain lifecycle management | Netim, Namecheap |
+| DNS-focused workflows | Cloudflare |
+| Budget-conscious registrations | Porkbun |
+| Enterprise requirements | Netim |
+| Automation & AI Scripts | All (verify capabilities first) |
