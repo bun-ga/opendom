@@ -1,0 +1,69 @@
+# Command Cheat Sheet
+
+The comprehensive reference for all `opendom` commands and flags.
+
+## Authentication (Auth)
+
+| Command | Usage | Description |
+|---------|-------|-------------|
+| `login` | `opendom login <provider>` | Interactive login with credentials. |
+| `login` | `opendom login --provider <provider> [flags]` | Non-interactive login with explicit flags. |
+| `logout`| `opendom logout [--provider <p>]` | Clear saved credentials for a provider. |
+| `logout`| `opendom logout --all` | Clear every saved provider credential. |
+| `set-default` | `opendom set-default <provider>` | Save a provider for future commands. |
+
+### Provider-Specific Login Flags
+
+- **Netim**: `--id`, `--secret`, `[--ote]`
+- **Cloudflare**: `--token`, `[--account-id]`
+- **Porkbun**: `--apikey`, `--secretapikey`
+- **Namecheap**: `--api-user`, `--username`, `--api-key`, `--client-ip`, `[--sandbox]`, `[--address-id <ID>]`
+
+---
+
+## Domain Operations (Domains)
+
+| Command | Usage | Description |
+|---------|-------|-------------|
+| `search` | `opendom search <name> [--tlds <l>] [--price]` | Check domain availability. Alias: `search`. |
+| `buy` | `opendom buy <domain> [--yes] [--duration <y>] [--owner <id>]` | Register a new domain. |
+| `domains`| `opendom domains` | List all your owned domains. Alias: `ls`. |
+| `info` | `opendom info <domain>` | Get detailed information for a domain. |
+| `renew` | `opendom renew <domain> [--yes] [--duration <y>]` | Extend registration for a domain. |
+| `set` | `opendom set <domain> <pref> <on/off>` | Toggle `whois-privacy`, `auto-renew`, `lock`. |
+
+---
+
+## DNS Management (DNS)
+
+| Command | Usage | Description |
+|---------|-------|-------------|
+| `dns list`| `opendom dns list <domain>` | List all DNS records for a domain. Alias: `dns ls`. |
+| `dns set` | `opendom dns set <dom> <TYPE> <VAL> [flags]` | Add a new record. Alias: `dns add`. |
+| `dns rm` | `opendom dns rm <dom> <TYPE> <VAL> [flags]` | Remove an existing record. Alias: `dns delete`. |
+| `dns update`| `opendom dns update <dom> <T> <O> <N> [flags]`| Update an existing record value. |
+| `dns ns` | `opendom dns ns <dom> <ns1> <ns2>...`| Update nameserver assignments. |
+
+### DNS Flags
+
+- `--subdomain, -s`: Specify subdomain (defaults to `@`).
+- `--ttl <seconds>`: Set the record TTL.
+- `--priority <val>`: Set record priority (for MX, SRV).
+
+---
+
+## Account (Account)
+
+| Command | Usage | Description |
+|---------|-------|-------------|
+| `balance` | `opendom balance` | Display account balance and currency. |
+
+---
+
+## Global Options
+
+The following flags can be used on any command:
+
+- `--provider <provider>`: Override the saved default provider for this command.
+- `--help, -h`: Show command-specific help documentation.
+- `--version, -v`: Show the currently installed version.
