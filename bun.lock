@@ -22,29 +22,16 @@
       },
     },
     "apps/opendom-cli": {
-      "name": "@opendom/cli",
+      "name": "@bun-ga/opendom",
       "version": "0.2.0",
       "bin": {
-        "opendom": "./dist/index.js",
-      },
-      "dependencies": {
-        "@opendom/config": "workspace:*",
+        "opendom": "dist/index.js",
       },
       "devDependencies": {
         "@biomejs/biome": "^1.9.4",
         "@opendom/tsconfig": "workspace:*",
         "@types/node": "^22.19.11",
         "tsx": "^4.21.0",
-        "typescript": "^5.9.3",
-      },
-    },
-    "packages/config": {
-      "name": "@opendom/config",
-      "version": "0.1.0",
-      "devDependencies": {
-        "@biomejs/biome": "^1.9.4",
-        "@opendom/tsconfig": "workspace:*",
-        "@types/node": "^22.19.11",
         "typescript": "^5.9.3",
       },
     },
@@ -120,6 +107,8 @@
     "@biomejs/cli-win32-x64": ["@biomejs/cli-win32-x64@1.9.4", "", { "os": "win32", "cpu": "x64" }, "sha512-8Y5wMhVIPaWe6jw2H+KlEm4wP/f7EW3810ZLmDlrEEy5KvBsb9ECEfu/kMWD484ijfQ8+nIi0giMgu9g1UAuuA=="],
 
     "@braintree/sanitize-url": ["@braintree/sanitize-url@7.1.2", "", {}, "sha512-jigsZK+sMF/cuiB7sERuo9V7N9jx+dhmHHnQyDSVdpZwVutaBu7WvNYqMDLSgFgfB30n452TP3vjDAvFC973mA=="],
+
+    "@bun-ga/opendom": ["@bun-ga/opendom@workspace:apps/opendom-cli"],
 
     "@chevrotain/cst-dts-gen": ["@chevrotain/cst-dts-gen@11.1.2", "", { "dependencies": { "@chevrotain/gast": "11.1.2", "@chevrotain/types": "11.1.2", "lodash-es": "4.17.23" } }, "sha512-XTsjvDVB5nDZBQB8o0o/0ozNelQtn2KrUVteIHSlPd2VAV2utEb6JzyCJaJ8tGxACR4RiBNWy5uYUHX2eji88Q=="],
 
@@ -226,10 +215,6 @@
     "@mermaid-js/parser": ["@mermaid-js/parser@1.0.0", "", { "dependencies": { "langium": "^4.0.0" } }, "sha512-vvK0Hi/VWndxoh03Mmz6wa1KDriSPjS2XMZL/1l19HFwygiObEEoEwSDxOqyLzzAI6J2PU3261JjTMTO7x+BPw=="],
 
     "@noble/hashes": ["@noble/hashes@1.8.0", "", {}, "sha512-jCs9ldd7NwzpgXDIf6P3+NrHh9/sD6CQdxHyjQI+h/6rDNo88ypBxxz45UDuZHz9r3tNz7N/VInSVoVdtXEI4A=="],
-
-    "@opendom/cli": ["@opendom/cli@workspace:apps/opendom-cli"],
-
-    "@opendom/config": ["@opendom/config@workspace:packages/config"],
 
     "@opendom/tsconfig": ["@opendom/tsconfig@workspace:packages/tsconfig"],
 

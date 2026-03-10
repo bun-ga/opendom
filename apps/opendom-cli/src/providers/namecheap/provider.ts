@@ -3,7 +3,7 @@ import {
   type NamecheapCredentials,
   getProvider,
   setProvider,
-} from "@opendom/config";
+} from "../../config/index.js";
 import { assertCapability } from "../capabilities.js";
 import { CapabilityError, ProviderConstraintError } from "../errors.js";
 import type {

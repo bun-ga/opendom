@@ -16,7 +16,7 @@ process.env.HOME = testHome;
 process.env.USERPROFILE = testHome;
 process.env.OPENDOM_DISABLE_KEYCHAIN = "1";
 
-type ConfigModule = typeof import("@opendom/config");
+type ConfigModule = typeof import("../src/config/index.js");
 
 type RegisterPayload = {
   idOwner?: string;
@@ -108,7 +108,7 @@ function setNetimCredentials(overrides: Record<string, unknown> = {}): void {
 beforeAll(async () => {
   originalFetch = globalThis.fetch;
   ({ NetimProvider } = await import("../src/providers/netim/provider.js"));
-  cfg = await import("@opendom/config");
+  cfg = await import("../src/config/index.js");
   cfg.__setConfigPathForTests(testConfigPath);
   cfg.__setSecretStorageAdapterForTests(null);
 });

@@ -198,13 +198,9 @@ function maybeBackupLegacy(): void {
 }
 
 function cloneProviderState(state: ProviderState): ProviderState {
-  const credentials = isObject(state.credentials)
-    ? { ...state.credentials }
-    : {};
+  const credentials = isObject(state.credentials) ? { ...state.credentials } : {};
   const session = state.session ? { ...state.session } : undefined;
-  const secretStorage = state.secretStorage
-    ? { ...state.secretStorage }
-    : undefined;
+  const secretStorage = state.secretStorage ? { ...state.secretStorage } : undefined;
   return {
     ...state,
     credentials,
@@ -259,7 +255,6 @@ function writeSecretPayload(
     return false;
   }
 
-  // Require round-trip readability to avoid persisting an unreadable secret storage state.
   const roundTrip = readSecretPayload(provider);
   if (!roundTrip) {
     return false;
@@ -342,9 +337,7 @@ function hydrateProviderState(
     return hydrated;
   }
 
-  const credentials = isObject(hydrated.credentials)
-    ? hydrated.credentials
-    : {};
+  const credentials = isObject(hydrated.credentials) ? hydrated.credentials : {};
   for (const [key, value] of Object.entries(payload.credentials)) {
     credentials[key] = value;
   }

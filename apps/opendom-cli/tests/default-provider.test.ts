@@ -16,7 +16,7 @@ process.env.HOME = testHome;
 process.env.USERPROFILE = testHome;
 process.env.OPENDOM_DISABLE_KEYCHAIN = "1";
 
-type ConfigModule = typeof import("@opendom/config");
+type ConfigModule = typeof import("../src/config/index.js");
 type ProviderResolutionModule = typeof import("../src/provider-resolution.js");
 
 let cfg: ConfigModule;
@@ -70,7 +70,7 @@ function setConfiguredProvider(
 }
 
 beforeAll(async () => {
-  cfg = await import("@opendom/config");
+  cfg = await import("../src/config/index.js");
   providerResolution = await import("../src/provider-resolution.js");
   cfg.__setConfigPathForTests(testConfigPath);
   cfg.__setSecretStorageAdapterForTests(null);

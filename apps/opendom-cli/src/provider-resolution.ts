@@ -1,4 +1,4 @@
-import * as cfg from "@opendom/config";
+import * as cfg from "./config/index.js";
 import { normalizeProviderId } from "./login-flow.js";
 import type { ProviderId } from "./providers/types.js";
 

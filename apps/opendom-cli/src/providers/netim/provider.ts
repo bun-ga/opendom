@@ -4,7 +4,7 @@ import {
   getProvider,
   setProvider,
   setProviderSession,
-} from "@opendom/config";
+} from "../../config/index.js";
 import { Netim } from "../../api/netim.js";
 import type {
   AccountInfo,

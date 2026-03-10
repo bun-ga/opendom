@@ -1,4 +1,4 @@
-import { getProvider, setProvider } from "@opendom/config";
+import { getProvider, setProvider } from "../../config/index.js";
 import { assertCapability } from "../capabilities.js";
 import { CapabilityError, ProviderConstraintError } from "../errors.js";
 import type {

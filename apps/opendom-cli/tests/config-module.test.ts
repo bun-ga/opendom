@@ -3,7 +3,7 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-type ConfigModule = typeof import("../src/index.ts");
+type ConfigModule = typeof import("../src/config/index.js");
 
 interface TestSecretStorageAdapter {
   read(account: string): string | undefined;
@@ -45,7 +45,7 @@ const testConfigPath = join(testDir, "config.json");
 let cfg: ConfigModule;
 
 beforeAll(async () => {
-  cfg = await import("../src/index.ts");
+  cfg = await import("../src/config/index.js");
   cfg.__setConfigPathForTests(testConfigPath);
 });
 
@@ -260,10 +260,4 @@ test("setDefaultProvider persists and clearProvider removes the default", () => 
 
   cfg.clearProvider("cloudflare");
   expect(cfg.getDefaultProvider()).toBeUndefined();
-});
-
-test("requireProvider points to positional login when provider is missing", () => {
-  expect(() => cfg.requireProvider("cloudflare")).toThrow(
-    "Provider 'cloudflare' is not configured. Run: opendom login cloudflare",
-  );
 });

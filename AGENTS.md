@@ -4,9 +4,8 @@
 This repository is a Bun workspace managed by Turborepo. Use package boundaries intentionally and keep shared logic in `packages/`.
 
 ### Top-Level Layout
-- `apps/opendom-cli`: main CLI application (`@opendom/cli`), provider integrations, command wiring, and terminal UX.
+- `apps/opendom-cli`: main CLI application (`@bun-ga/opendom`), provider integrations, command wiring, and terminal UX.
 - `apps/docs-web`: Vocs-based documentation site.
-- `packages/config`: shared config/session/credential helpers used by the CLI.
 - `packages/tsconfig`: shared TypeScript preset packages.
 - `docs/`: provider notes, testing checklists, and implementation plans.
 - `scripts/smoke`: smoke test utilities and preflight checks.
@@ -19,7 +18,7 @@ This repository is a Bun workspace managed by Turborepo. Use package boundaries 
 ### Architecture Notes
 - CLI command surface is implemented in `apps/opendom-cli/src/index.ts`.
 - Provider implementations are under `apps/opendom-cli/src/providers/<provider>/`.
-- Cross-cutting configuration state is centralized in `@opendom/config`.
+- Cross-cutting configuration state is centralized in `apps/opendom-cli/src/config/`.
 
 ## Build, Test, and Development Commands
 Run commands from repository root unless stated otherwise.
@@ -28,15 +27,15 @@ Run commands from repository root unless stated otherwise.
 - `bun install`: install all workspace dependencies from `bun.lock`.
 - `bun run dev`: run package `dev` scripts through Turbo in parallel (where available).
 - `bun run build`: build all buildable workspaces (`dist/**` outputs).
-- `bun run start`: run the built CLI via Turbo filter (`@opendom/cli`).
+- `bun run start`: run the built CLI via Turbo filter (`@bun-ga/opendom`).
 - `bun run typecheck`: run TypeScript no-emit checks across workspace.
 - `bun run lint`: run Biome checks in all packages that define lint scripts.
 - `bun run test`: run package tests (Bun test runner).
 - `bun run clean`: remove package build artifacts.
 
 ### Targeted Commands
-- `bunx turbo run build --filter=@opendom/cli`: build only CLI and dependencies.
-- `bunx turbo run test --filter=@opendom/config`: run tests for one package.
+- `bunx turbo run build --filter=@bun-ga/opendom`: build only CLI and dependencies.
+- `bunx turbo run test --filter=@bun-ga/opendom`: run tests for the CLI package.
 - `bunx turbo run build --affected`: build only changed packages (and dependents) in CI/local workflows.
 
 ### Smoke and OT&E Commands
@@ -75,7 +74,6 @@ Use smoke tests only with OT&E/test credentials and disposable domains.
 - Test runner: `bun test`.
 - Existing test suites:
   - `apps/opendom-cli/tests`
-  - `packages/config/tests`
 
 ### Expectations for Changes
 - Add or update tests for behavioral changes in command parsing, provider behavior, or shared config logic.

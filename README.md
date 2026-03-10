@@ -16,9 +16,8 @@ This project uses **Bun workspaces + Turborepo**.
 ```text
 opendom/
 ├── apps/
-│   └── opendom-cli/        # @opendom/cli (main app)
+│   └── opendom-cli/        # @bun-ga/opendom (main app)
 ├── packages/
-│   ├── config/             # @opendom/config shared config helpers
 │   └── tsconfig/           # @opendom/tsconfig shared TS presets
 ├── scripts/smoke/          # read-only provider smoke checks
 ├── turbo.json
@@ -176,4 +175,4 @@ Legacy Netim configs are auto-migrated and backed up as:
 
 ## License
 
-GPL-3.0 license
+AGPL-3.0-only license

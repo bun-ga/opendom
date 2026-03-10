@@ -1,11 +1,33 @@
 {
-  "name": "@opendom/cli",
-  "version": "0.2.0",
+  "name": "@bun-ga/opendom",
+  "version": "0.2.1",
   "description": "CLI domain management tool. No upsells, no popups, just domains.",
+  "license": "AGPL-3.0-only",
   "type": "module",
-  "bin": {
-    "opendom": "./dist/index.js"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bun-ga/opendom.git",
+    "directory": "apps/opendom-cli"
   },
+  "bugs": {
+    "url": "https://github.com/bun-ga/opendom/issues"
+  },
+  "homepage": "https://github.com/bun-ga/opendom/tree/main/apps/opendom-cli",
+  "keywords": [
+    "cli",
+    "cloudflare",
+    "dns",
+    "domains",
+    "namecheap",
+    "netim",
+    "porkbun"
+  ],
+  "bin": {
+    "opendom": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsc -p tsconfig.json",
@@ -13,11 +35,13 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "biome check .",
     "test": "bun test",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "prepack": "bunx turbo run build --filter=@bun-ga/opendom"
   },
-  "dependencies": {
-    "@opendom/config": "workspace:*"
+  "publishConfig": {
+    "access": "public"
   },
+  "dependencies": {},
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@opendom/tsconfig": "workspace:*",

@@ -1,12 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { randomBytes } from "node:crypto";
-import {
-  chmodSync,
-  mkdtempSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from "node:fs";
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -18,7 +12,7 @@ import {
   encrypt,
   generateKey,
   loadKey,
-} from "../src/encryption.js";
+} from "../src/config/encryption.js";
 
 describe("encryption", () => {
   let testDir: string;
@@ -168,7 +162,6 @@ describe("encryption", () => {
       const key1 = loadKey();
       expect(key1.length).toBe(32);
 
-      const keyFile = join(testDir, "encryption.key");
       const key2 = loadKey();
       expect(key2.equals(key1)).toBe(true);
     });

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import * as cfg from "@opendom/config";
+import * as cfg from "./config/index.js";
 import {
   collectInteractiveLoginInput,
   normalizeProviderId,
@@ -29,7 +29,7 @@ import {
   sym,
 } from "./ui.js";
 
-const VERSION = "0.2.0";
+const VERSION = "0.2.1";
 
 const HELP = `
 ${c.bold(c.cyan("opendom"))} ${c.dim(`v${VERSION}`)}
