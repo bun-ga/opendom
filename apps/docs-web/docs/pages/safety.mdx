@@ -1,0 +1,61 @@
+# Safety & Reliability
+
+`opendom` is built for high-stakes environments where mistakes have real-world consequences. We prioritize **explicit intent** over silent automation.
+
+## Philosophy of Explicit Intent
+
+AI agents and developers should never accidentally spend money or modify domains without deliberate action. Our safety system enforces three core principles:
+
+1.  **Explicit Over Implicit:** No operation executes without clear user intent.
+2.  **Preview Before Action:** Destructive or financial operations must show exactly what will happen.
+3.  **Fail Safely:** When in doubt, the CLI errors on the side of caution.
+
+---
+
+## Dry-Run Mode
+
+All operations support a `--dry-run` flag. This simulates the operation without making any changes, allowing you to verify the exact API calls and expected outcomes.
+
+```bash
+# Preview domain purchase
+opendom buy example.com --dry-run
+```
+
+**Expected Dry-Run Output:**
+```bash
+  Dry Run - No Changes Will Be Made
+  ─────────────────────────────────
+  Operation:  Domain Registration
+  Provider:   porkbun
+  Domain:     myproject.io
+  Duration:   1 year(s)
+  Price:      $12.00 USD
+```
+
+---
+
+## Explicit Confirmation
+
+All domain purchases, renewals, and DNS modifications require explicit confirmation via the `--yes` or `-y` flag. Without this flag, `opendom` will either prompt you interactively or fail (in non-interactive shells).
+
+```bash
+# Correct way to purchase in a script
+opendom buy example.com --yes --provider porkbun
+```
+
+---
+
+## CLI Exit Codes
+
+Standardized exit codes allow scripts and AI agents to handle errors programmatically.
+
+| Exit Code | Name | Description |
+|-----------|------|-------------|
+| 0 | Success | Operation completed successfully |
+| 1 | General Error | Unexpected error occurred |
+| 2 | Invalid Arguments | Command-line arguments are invalid |
+| 3 | Authentication Error | Credentials are missing, invalid, or expired |
+| 4 | Provider API Error | Provider API returned an error |
+| 5 | Operation Pending | Async operation queued (check operation ID) |
+| 6 | Rate Limited | Provider rate limit exceeded |
+| 7 | Timeout | Operation timed out |
