@@ -29,7 +29,7 @@ import {
   sym,
 } from "./ui.js";
 
-const VERSION = "0.2.1";
+const VERSION = "0.2.2";
 
 const HELP = `
 ${c.bold(c.cyan("opendom"))} ${c.dim(`v${VERSION}`)}

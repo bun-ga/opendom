@@ -1,7 +1,7 @@
 {
   "name": "@bun-ga/opendom",
-  "version": "0.2.1",
-  "description": "CLI domain management tool. No upsells, no popups, just domains.",
+  "version": "0.2.2",
+  "description": "Multi-provider domain management from your terminal. No upsells, no popups.",
   "license": "AGPL-3.0-only",
   "type": "module",
   "repository": {
@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/bun-ga/opendom/issues"
   },
-  "homepage": "https://github.com/bun-ga/opendom/tree/main/apps/opendom-cli",
+  "homepage": "https://opendom.bun.ga/",
   "keywords": [
     "cli",
     "cloudflare",
