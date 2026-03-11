@@ -47,7 +47,7 @@ ${c.bold("AUTH")}
 
 ${c.bold("DOMAINS")}
   search  <name> [--tlds com,io,dev] [--provider <provider>] [--price]
-  buy     <domain> [--yes] [--duration] [--owner <contactId>] [--provider <provider>]
+  buy     <domain> [--yes] [--duration] [--owner <contactId>] [--address-id <ADDRESS_ID>] [--provider <provider>]
   domains [--provider <provider>]
   info    <domain> [--provider <provider>]
   renew   <domain> [--yes] [--duration] [--provider <provider>]

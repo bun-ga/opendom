@@ -65,12 +65,12 @@ function toAddressInfoXml(profile: AddressProfile): string {
     `<Address1>${profile.address1}</Address1>`,
     `<City>${profile.city}</City>`,
     `<StateProvince>${profile.stateProvince}</StateProvince>`,
-    `<PostalCode>${profile.postalCode}</PostalCode>`,
+    `<Zip>${profile.postalCode}</Zip>`,
     `<Country>${profile.country}</Country>`,
     `<Phone>${profile.phone}</Phone>`,
     `<EmailAddress>${profile.emailAddress}</EmailAddress>`,
     profile.organizationName
-      ? `<OrganizationName>${profile.organizationName}</OrganizationName>`
+      ? `<Organization>${profile.organizationName}</Organization>`
       : "",
     `<Default_YN>${profile.defaultYn ? "true" : "false"}</Default_YN>`,
   ].join("");
@@ -334,6 +334,7 @@ describe("NamecheapProvider address-id resolution", () => {
     expect(createParams).toBeDefined();
     expect(createParams?.RegistrantFirstName).toBe("Stored");
     expect(createParams?.RegistrantLastName).toBe("Contact");
+    expect(createParams?.RegistrantPostalCode).toBe("EC1A1AA");
     expect(createParams?.AdminEmailAddress).toBe("stored@example.test");
   });
 

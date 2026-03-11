@@ -157,11 +157,14 @@ export class NamecheapClient {
       address1: firstTagText(xml, "Address1") ?? "",
       city: firstTagText(xml, "City") ?? "",
       stateProvince: firstTagText(xml, "StateProvince") ?? "",
-      postalCode: firstTagText(xml, "PostalCode") ?? "",
+      postalCode:
+        firstTagText(xml, "Zip") ?? firstTagText(xml, "PostalCode") ?? "",
       country: firstTagText(xml, "Country") ?? "",
       phone: firstTagText(xml, "Phone") ?? "",
       emailAddress: firstTagText(xml, "EmailAddress") ?? "",
-      organizationName: firstTagText(xml, "OrganizationName"),
+      organizationName:
+        firstTagText(xml, "Organization") ??
+        firstTagText(xml, "OrganizationName"),
       defaultYn:
         defaultRaw == null
           ? undefined
