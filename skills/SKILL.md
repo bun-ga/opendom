@@ -48,6 +48,31 @@ opendom balance                       # Check account balance
 | dns-ns          | Yes     | No         | Yes      | Yes       |
 | balance         | Yes     | Yes        | Yes      | Yes       |
 
+## Command Compatibility (Detailed)
+
+| Command              | Netim | Cloudflare | Porkbun | Namecheap |
+|:--------------------|:-----:|:----------:|:-------:|:---------:|
+| login/logout        | OK    | OK         | OK      | OK        |
+| balance             | OK    | PARTIAL    | PARTIAL | PARTIAL   |
+| search              | OK    | PARTIAL    | OK      | OK        |
+| buy                 | OK    | FAIL-FAST  | OK      | OK        |
+| domains             | OK    | OK         | OK      | OK        |
+| info                | OK    | OK         | OK      | OK        |
+| renew               | OK    | FAIL-FAST  | FAIL-FAST | OK      |
+| set whois-privacy   | OK    | OK         | FAIL-FAST | OK      |
+| set auto-renew      | OK    | OK         | OK      | FAIL-FAST |
+| set lock            | OK    | OK         | FAIL-FAST | OK      |
+| dns list            | OK    | OK         | OK      | OK        |
+| dns set             | OK    | OK         | OK      | OK        |
+| dns rm              | OK    | OK         | OK      | OK        |
+| dns update          | OK    | OK         | OK      | OK        |
+| dns ns              | OK    | FAIL-FAST  | OK      | OK        |
+
+Legend:
+- **OK**: Fully supported
+- **PARTIAL**: Works but may have limited data
+- **FAIL-FAST**: Blocked intentionally with guidance message
+
 ## Authentication
 
 ### Netim
@@ -401,6 +426,41 @@ ProviderConstraintError: Domain name exceeds maximum length
 
 **Handling**: Fix the constraint violation (e.g., shorten domain name, use allowed TLD).
 
+### Handling Pending Operations
+
+Some operations return `PENDING` status (async operations). Recommended pattern:
+
+```bash
+# Pseudo-code for handling pending operations
+MAX_ATTEMPTS=5
+DELAY_SECONDS=20
+
+attempt=0
+while [ $attempt -lt $MAX_ATTEMPTS ]; do
+  result=$(opendom buy example.com --yes 2>&1)
+  if echo "$result" | grep -q "DONE"; then
+    echo "Operation completed"
+    break
+  elif echo "$result" | grep -q "PENDING"; then
+    attempt=$((attempt + 1))
+    if [ $attempt -lt $MAX_ATTEMPTS ]; then
+      echo "Operation pending... retrying in ${DELAY_SECONDS}s (attempt $attempt/$MAX_ATTEMPTS)"
+      sleep $DELAY_SECONDS
+    else
+      echo "WARNING: Operation still pending after $MAX_ATTEMPTS attempts"
+      echo "Please check provider dashboard for status"
+      # Alert master/operator
+      exit 1
+    fi
+  else
+    echo "Error: $result"
+    exit 1
+  fi
+done
+```
+
+**Recommended timing**: Poll every 20-30 seconds, max 5 attempts. If still pending after 5 attempts, warn the operator/master.
+
 ---
 
 ## Confirmation Bypass
@@ -414,6 +474,19 @@ opendom buy example.com --yes
 # Renew without confirmation
 opendom renew example.com --yes
 ```
+
+---
+
+## Rate Limits per Provider
+
+| Provider    | Rate Limit                        |
+|------------|-----------------------------------|
+| Namecheap  | 50 req/min, 700 req/hour, 8000 req/day |
+| Cloudflare | 1200 req/5 min, 200 req/second  |
+| Netim      | 5000 req/day                     |
+| Porkbun    | Unknown (implement conservative backoff) |
+
+**Handling**: Implement exponential backoff when rate limited. For Namecheap/Cloudflare, track request counts to stay within limits.
 
 ---
 
@@ -496,24 +569,47 @@ opendom info example.com
 ### Netim
 - Full support for all features
 - Use `--ote` flag for testing in sandbox environment
+- `buy` auto-resolves Owner/Admin/Tech/Billing from account defaults when not provided; use `--owner` to override
 
 ### Cloudflare
 - Cannot buy domains (use dashboard)
 - Cannot renew domains (use dashboard)
 - Cannot set nameservers via API (managed by Cloudflare)
+- `search` and `set` require registrar scope token (not just zone scope)
 
 ### Porkbun
 - Cannot renew domains (use dashboard)
 - All other features fully supported
+- **Important**: Domain-level API Access must be enabled in dashboard before using CLI
 
 ### Namecheap
 - Full support for all features
 - Requires `--sandbox` flag for testing
-- Requires valid `--client-ip` for API calls
+- Requires valid `--client-ip` for API calls (must be whitelisted in account)
+- `set auto-renew` not supported via CLI
 
 ---
 
 ## Tips for AI Agents
+
+### Version Checking
+
+Always check CLI version before running commands:
+
+```bash
+# Check version
+opendom --version
+# Output: 0.2.2
+
+# Verify minimum version in your agent
+VERSION=$(opendom --version)
+if [ "$VERSION" \< "0.2.0" ]; then
+  echo "Error: Minimum version 0.2.0 required"
+  exit 1
+fi
+```
+
+Current stable version: **0.2.2**
 
 ### Provider Selection
 
