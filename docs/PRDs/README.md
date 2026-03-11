@@ -33,7 +33,7 @@ opendom solves these problems by providing a unified, agent-friendly CLI that ab
 **Fully Free & Open Source**
 
 - No paid tiers, no freemium limitations
-- MIT Licensed
+- AGPL-3.0-only Licensed
 - Community-driven development
 - No vendor lock-in
 

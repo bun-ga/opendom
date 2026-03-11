@@ -282,9 +282,10 @@ describe("config-encryption-integration", () => {
       const encryptedEntry = secrets["provider:cloudflare"];
       expect(encryptedEntry).toBeDefined();
 
-      const decryptedPayload = JSON.parse(
-        decrypt(encryptedEntry),
-      ) as Record<string, unknown>;
+      const decryptedPayload = JSON.parse(decrypt(encryptedEntry)) as Record<
+        string,
+        unknown
+      >;
       expect(decryptedPayload.sessionToken).toBe("SESSION_123");
 
       const state = getProvider("cloudflare");

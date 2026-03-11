@@ -1,6 +1,6 @@
 {
   "name": "@bun-ga/opendom",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Multi-provider domain management from your terminal. No upsells, no popups.",
   "license": "AGPL-3.0-only",
   "type": "module",
@@ -25,9 +25,7 @@
   "bin": {
     "opendom": "dist/index.js"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsc -p tsconfig.json",
@@ -36,7 +34,8 @@
     "lint": "biome check .",
     "test": "bun test",
     "clean": "rm -rf dist",
-    "prepack": "bunx turbo run build --filter=@bun-ga/opendom"
+    "prepack": "cp ../../LICENSE ./LICENSE && bunx turbo run build --filter=@bun-ga/opendom",
+    "postpack": "rm -f ./LICENSE"
   },
   "publishConfig": {
     "access": "public"

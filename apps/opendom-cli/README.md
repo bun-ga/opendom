@@ -157,7 +157,7 @@ Legacy Netim configs are auto-migrated and backed up as:
 - Documentation: https://opendom.bun.ga/
 - Repository: https://github.com/bun-ga/opendom
 - Issues: https://github.com/bun-ga/opendom/issues
-- Package source: https://github.com/bun-ga/opendom/tree/docs/apps/opendom-cli
+- Package source: https://github.com/bun-ga/opendom/tree/main/apps/opendom-cli
 
 ## License
 

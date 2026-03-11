@@ -198,9 +198,13 @@ function maybeBackupLegacy(): void {
 }
 
 function cloneProviderState(state: ProviderState): ProviderState {
-  const credentials = isObject(state.credentials) ? { ...state.credentials } : {};
+  const credentials = isObject(state.credentials)
+    ? { ...state.credentials }
+    : {};
   const session = state.session ? { ...state.session } : undefined;
-  const secretStorage = state.secretStorage ? { ...state.secretStorage } : undefined;
+  const secretStorage = state.secretStorage
+    ? { ...state.secretStorage }
+    : undefined;
   return {
     ...state,
     credentials,
@@ -337,7 +341,9 @@ function hydrateProviderState(
     return hydrated;
   }
 
-  const credentials = isObject(hydrated.credentials) ? hydrated.credentials : {};
+  const credentials = isObject(hydrated.credentials)
+    ? hydrated.credentials
+    : {};
   for (const [key, value] of Object.entries(payload.credentials)) {
     credentials[key] = value;
   }

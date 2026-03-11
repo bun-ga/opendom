@@ -1,3 +1,4 @@
+import { Netim } from "../../api/netim.js";
 import {
   type NetimCredentials,
   type ProviderSession,
@@ -5,7 +6,6 @@ import {
   setProvider,
   setProviderSession,
 } from "../../config/index.js";
-import { Netim } from "../../api/netim.js";
 import type {
   AccountInfo,
   DnsRecord,
