@@ -1,3 +1,38 @@
+---
+name: opendom-cli
+description: "AI Agent skill for opendom CLI - domain management across Netim, Cloudflare, Porkbun, and Namecheap. Search, buy, renew, and manage DNS records."
+---
+
+## Skill Usage
+
+This skill provides AI agents with the complete reference for using opendom CLI to manage domains across multiple providers.
+
+**When to use:**
+- Registering new domains
+- Checking domain availability
+- Managing DNS records
+- Renewing domain registrations
+- Setting domain preferences (WHOIS privacy, auto-renew, registrar lock)
+- Checking account balances
+
+**Quick start:**
+```bash
+# Check version first
+opendom --version
+
+# Login to provider
+opendom login netim --id RESELLER_ID --secret SECRET --ote
+
+# Search for domains
+opendom search myapp --tlds com,io,dev
+
+# Buy domain
+opendom buy myapp.com --yes
+
+# Manage DNS
+opendom dns set myapp.com A 192.0.2.1
+```
+
 # opendom CLI - AI Agent Reference
 
 ## Overview
